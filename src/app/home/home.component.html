@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <h1>Open Trivia</h1>
+  <div *ngFor="let triviaQuestion of triviaQuestions">
+    <h2>{{triviaQuestion.category}}</h2>
+    <h3>{{triviaQuestion.question}}</h3>
+    <div *ngFor="let answerOption of triviaQuestion.answerOptions">
+      <div
+        *ngIf="triviaResult === undefined || triviaResult.triviaAnswer.triviaQuestion.question !== triviaQuestion.question">
+        <button mat-button class="big-button"
+                (click)="checkAnswer(triviaQuestion.question, answerOption)">{{answerOption}}</button>
+      </div>
+      <div
+        *ngIf="triviaResult !== undefined && triviaResult.triviaAnswer.triviaQuestion.question === triviaQuestion.question">
+        <div *ngIf="triviaResult.pickedAnswer === answerOption">
+          <div *ngIf="triviaResult.correctAnswer">
+            <button mat-button class="big-button green-button"
+                    (click)="checkAnswer(triviaQuestion.question, answerOption)">{{answerOption}}</button>
+          </div>
+          <div *ngIf="!triviaResult.correctAnswer">
+            <button mat-button class="big-button red-button"
+                    (click)="checkAnswer(triviaQuestion.question, answerOption)">{{answerOption}}</button>
+          </div>
+        </div>
+        <div *ngIf="triviaResult.pickedAnswer !== answerOption">
+          <button mat-button class="big-button"
+                  (click)="checkAnswer(triviaQuestion.question, answerOption)">{{answerOption}}</button>
+        </div>
+      </div>
+    </div>
+    <h2>{{triviaQuestion.difficulty}}</h2>
+  </div>
+</div>
