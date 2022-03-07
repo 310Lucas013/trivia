@@ -4,7 +4,9 @@ import com.lucas.trivia.models.dto.ResultDto;
 import com.lucas.trivia.models.dto.TriviaQuestionDto;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class TriviaQuestion {
     private String category;
@@ -23,12 +25,16 @@ public class TriviaQuestion {
         this.question = question;
         answerOptions = incorrect_answers;
         answerOptions.add(correct_answer);
+        randomizeAnswerOptions();
     }
 
     public TriviaQuestion(ResultDto resultDto) {
         this(resultDto.getCategory(), resultDto.getType(), resultDto.getDifficulty(), resultDto.getQuestion(), resultDto.getCorrect_answer(), resultDto.getIncorrect_answers());
     }
 
+    private void randomizeAnswerOptions() {
+        Collections.shuffle(getAnswerOptions(), new Random());
+    }
 
     public String getCategory() {
         return category;

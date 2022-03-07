@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@CrossOrigin("http://localhost:4200")
 public class TriviaController {
 
     private final TriviaService triviaService;
